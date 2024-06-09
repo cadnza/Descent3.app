@@ -14,12 +14,6 @@ do
 	}
 done
 
-# Error if this isn't macOS
-[[ "$OSTYPE" == "darwin"* ]] || {
-	echo "This script only runs on macOS." >&2
-	false
-}
-
 # Go to Descent 3.app
 cd "$(dirname "$0")/../.."
 
