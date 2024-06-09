@@ -64,6 +64,7 @@ ping -c 1 github.com &> /dev/null && {
 }
 
 # Clean and build repo
+echo "Brewfile.lock.json" > "$dirRepo/.git/info/exclude"
 brew bundle --file "$dirRepo/Brewfile" install
 for artifact in "Descent3/builds" "Descent3/git-hash.txt"
 do
