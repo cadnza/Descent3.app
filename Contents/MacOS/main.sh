@@ -23,12 +23,13 @@ mkdir -p "$dirD3"
 
 # Download Windows version of Descent 3 from Steam if not already downloaded (recommended over macOS version for cutscene/cinematic support)
 dirSteamD3="$HOME/Library/Application Support/Steam/steamapps/common/Descent 3"
+idD3=273590
 [ -d "$dirSteamD3" ] || {
 	echo -n "Steam username: " && read -r usernameSteam
 	steamcmd \
 		+@sSteamCmdForcePlatformType windows \
 		+login "$usernameSteam" \
-		+app_update 273590 \
+		+app_update "$idD3" \
 		validate \
 		+quit
 }
