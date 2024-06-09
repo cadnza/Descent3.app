@@ -27,7 +27,7 @@ cd "$(dirname "$0")/../.."
 dirD3="D3-open-source"
 mkdir -p "$dirD3"
 
-# Download Windows version of Descent 3 from Steam if not already downloaded
+# Download Windows version of Descent 3 from Steam if not already downloaded (recommended over macOS version for cutscene/cinematic support)
 dirSteamD3="$HOME/Library/Application Support/Steam/steamapps/common/Descent 3"
 [ -d "$dirSteamD3" ] || {
 	echo -n "Steam username: " && read -r usernameSteam
