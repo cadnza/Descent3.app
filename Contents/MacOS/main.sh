@@ -6,7 +6,7 @@
 set -e
 
 # Make sure dependencies are installed
-for dep in brew steamcmd asdf
+for dep in brew steamcmd
 do
 	command -v "$dep" &> /dev/null || {
 		echo "Not found: $dep"
