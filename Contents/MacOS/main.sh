@@ -63,10 +63,14 @@ ping -c 1 github.com &> /dev/null && {
 	echo "Couldn't clone $urlClone" >&2
 }
 
-# Build repo
+# Clean and build repo
 brew bundle --file "$dirRepo/Brewfile" install
-(cd "$dirRepo" && cmake --preset mac -D ENABLE_LOGGER=ON --clean-first)
-(cd "$dirRepo" && cmake --build --preset mac --config Release --clean-first)
+for artifact in "Descent3/builds" "Descent3/git-hash.txt"
+do
+	[ -e "$artifact" ] && rm -rf "$artifact"
+done
+(cd "$dirRepo" && cmake --preset mac -D ENABLE_LOGGER=ON)
+(cd "$dirRepo" && cmake --build --preset mac --config Release)
 
 # Copy files
 cp -rf "$dirRepo/builds/mac/Descent3/release/." "$dirD3"
