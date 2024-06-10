@@ -48,18 +48,23 @@ cp -r "$dirSteamD3/movies" "$dirD3"
 # Create cache directory
 mkdir -p "$dirD3/custom/cache"
 
-# Clone or pull repo if internet's available
+# Clone or pull repo if Github's available
 urlClone="https://github.com/DescentDevelopers/Descent3.git"
 ping -c 1 github.com &> /dev/null && {
 	dirRepo=Descent3
-	[ -d "$dirRepo" ] && git -C "$dirRepo" pull || git clone "$urlClone"
+	if [ -d "$dirRepo" ]
+	then
+		git -C "$dirRepo" pull
+		echo "Brewfile.lock.json" > "$dirRepo/.git/info/exclude"
+	else
+		git clone "$urlClone"
+	fi
 }
 [ -d "$dirRepo" ] || {
 	echo "Couldn't clone $urlClone" >&2
 }
 
 # Clean and build repo
-echo "Brewfile.lock.json" > "$dirRepo/.git/info/exclude"
 brew bundle --file "$dirRepo/Brewfile" install
 for artifact in "Descent3/builds" "Descent3/git-hash.txt"
 do
