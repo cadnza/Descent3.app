@@ -42,7 +42,7 @@ do
 		cp "$f" "$dirD3"
 	done
 done
-cp -r "$dirSteamD3/demo" "$dirD3"
+cp -r "$dirSteamD3/missions" "$dirD3"
 cp -r "$dirSteamD3/movies" "$dirD3"
 
 # Create cache directory
@@ -65,6 +65,7 @@ ping -c 1 github.com &> /dev/null && {
 }
 
 # Clean and build repo
+brew install sdl2 zlib googletest
 brew bundle --file "$dirRepo/Brewfile" install
 for artifact in "Descent3/builds" "Descent3/git-hash.txt"
 do
@@ -74,7 +75,7 @@ done
 (cd "$dirRepo" && cmake --build --preset mac --config Release)
 
 # Copy files
-cp -rf "$dirRepo/builds/mac/Descent3/release/." "$dirD3"
+cp -rf "$dirRepo/builds/mac/Descent3/Release/Descent3.app/Contents/MacOS/." "$dirD3"
 
 # Run
 (cd "$dirD3" && ./Descent3)
